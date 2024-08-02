@@ -12,7 +12,7 @@
 my_list = [42, 69, 322, 13, 0, 99, -5, 9, 8, 7, -6, 5]
 b = 0
 c = len(my_list)
-while b <= c:
+while b < c:
     a = my_list[b]
     if a > 0:
         print(a)
