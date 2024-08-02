@@ -1,7 +1,7 @@
 # лекция
 
 phone_book = {"Denis" : 88005553535, "Max" : 88001000500, "Oleg" : ["Login", "password"]}
-print(phone_book)
+print(type(phone_book))
 
 print(phone_book["Denis"])
 
