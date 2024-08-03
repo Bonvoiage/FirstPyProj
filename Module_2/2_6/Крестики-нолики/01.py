@@ -34,10 +34,10 @@ print("Lets start")
 print()
 draw_area()
 for i in range (1, 50):
-    if check_winner() == x:
+    if current_turn >= 3 and check_winner() == x:
         print("Победил 1 игрок")
         break
-    if check_winner() == o:
+    if current_turn >= 3 and check_winner() == o:
         print("Победил 2 игрок")
         break
     if check_winner() == noone_win and current_turn == 11:                                     # Прерывание, когда определился победитель
