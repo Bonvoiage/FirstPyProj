@@ -1,7 +1,7 @@
 def check_winner():
     for row in range(3):
         if area[row][0] == area[row][1] == area[row][2] != area_symbol:     # Если, строка, столбец 1, столбец 2, столбец 3 не равны area_symbol и равны между собой, то
-            return row[0]                                                   # Возвращаем значение из 1 столбца заданной строчки
+            return area[row][0]                                                   # Возвращаем значение из 1 столбца заданной строчки
     for col in range(3):                                                    
         if area[0][col] == area[1][col] == area[2][col] != area_symbol:     # Если, столбец, строка 1, строка 2, строка 3 не равны area_symbol и равны между собой, то
             return area[0][col]                                             # Возвращаем значение из 1 строчки заданного столбца
@@ -26,23 +26,26 @@ player_turn = random.choice([1, 2])                     #Изначально с
 x = "X"
 o = "O"
 noone_win = "Draw"
+turn_1_player = 1
+turn_2_player = 1
+current_turn = int(turn_1_player + turn_2_player) -1
 
 print("Lets start")
 print()
 draw_area()
-for i in range (1, 11):
+for i in range (1, 50):
     if check_winner() == x:
         print("Победил 1 игрок")
         break
     if check_winner() == o:
         print("Победил 2 игрок")
         break
-    if check_winner() == noone_win and i == 10:                                     # Прерывание, когда определился победитель
+    if check_winner() == noone_win and current_turn == 11:                                     # Прерывание, когда определился победитель
         print("Победителя нет.")
         break
     elif player_turn % 2 == 0:                              # Логика Первого игрока
         print()
-        print(f"Ход {i}")
+        print(f"Ход {current_turn}")
         print(f"Ход игрока 1 со знаком '{x}' ")               # Обозначение хода
         print()
         row = int(input("Введите Строку: "))                    # Ввод строки
@@ -53,14 +56,14 @@ for i in range (1, 11):
         if area[row][col] != (area_symbol):                     # Проверка на то, что была задействованна правильная ячейка
             print("Вы не можете перезаписать чужой ход")
             player_turn -= 1                                    # Возвращаем ход игроку, который совершил не верный ход.
-            i = -1                                              # Возвращаем значение i к моменту, когда игрок ошибся.
+            turn_1_player = -1                                              # Возвращаем значение i к моменту, когда игрок ошибся.
         elif area[row][col] == (area_symbol):                   # Проверка пройдена
             area[row][col] = (x)                                # Записываем в ячейку "х" первого игрока
         player_turn += 1                                        # Передаем ход другому
         draw_area()
     elif player_turn % 2 == 1:                              # Логика второго игрока
         print()
-        print(f"Ход {i}")
+        print(f"Ход {current_turn}")
         print(f"Ход игрока 2 со знаком '{o}' ")              # Обозначение хода
         print()
         row = int(input("Введите Строку: "))                    # Ввод строки
@@ -71,7 +74,7 @@ for i in range (1, 11):
         if area[row][col] != (area_symbol):
             print("Вы не можете перезаписать чужой ход")
             player_turn -= 1
-            i = -1
+            turn_2_player = -1
         elif area[row][col] == (area_symbol):
             area[row][col] = (o)
         player_turn += 1
