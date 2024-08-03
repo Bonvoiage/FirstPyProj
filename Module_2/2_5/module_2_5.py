@@ -27,12 +27,13 @@
 
 
 def get_matrix(n, m, value):
-    matrix = []
-    for i in range (n):
-        matrix.append([])
-        for j in range (m):
-            matrix.append(value)
-    return matrix
+    matrix = []                         # Пустой список
+    for i in range (n):                 # Логика для столбца
+        k = []                          # Очень хотел избравиться от дополнительной переменной. Сидел около 2 часов, в голову не пришло ничего
+        for j in range (m):             # Столбец
+            k.append(value)             # Приравниваю столбец к value
+        matrix.append(k)                # Вывожу значения в столбец
+    return matrix                       # Завершаю цикл, возвращаю значение matrix  
 
 result1 = get_matrix(2, 2, 10)
 result2 = get_matrix(3, 5, 42)

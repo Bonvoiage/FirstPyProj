@@ -20,16 +20,16 @@ not_primes = []
 numbers_len = len(numbers)
 
 for i in range (numbers_len):
-    is_prime = 0
+    is_prime = 0                             # За циклом, для сброса счетчика после проверки, для того, чтобы задействовать break в случае выполнения условий
     for j in range (2, numbers[i]-1):
-        if is_prime == 1:
+        if is_prime == 1:                    # Условие проверки счетчика, изначальное значение 0, если условие соблюдено, закрывает цикл для j
             break
-        elif numbers[i] % j == 0:
+        elif numbers[i] % j == 0:            # Проверяет делится ли число из списка Numbers на число в диапазоне от 2х до Numbers-1 (j), при выполнении условий, счетчик меняет значение на другое
             is_prime += 1
-    if is_prime == True:                    #Проверка, если порядковый номер в списке Numbers - не простой, тогда выполняется следующее действие: Добавить в список not_primes
+    if is_prime == True:                     # Проверка, если порядковый номер в списке Numbers - не простой, тогда выполняется следующее действие: Добавить в список not_primes
         not_primes.append(numbers[i])
     elif is_prime == False:
-        primes.append(numbers[i])           #Проверка, если порядковый номер в списке Numbers - простой, тогда выполняется следующее действие: Добавить в список primes
+        primes.append(numbers[i])            # Проверка, если порядковый номер в списке Numbers - простой, тогда выполняется следующее действие: Добавить в список primes
     else:
         print("Who care, just chill")
 print(f"Primes: {primes}")  
