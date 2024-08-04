@@ -26,6 +26,7 @@ for i in range (numbers_len):
             break
         elif numbers[i] % j == 0:            # Проверяет делится ли число из списка Numbers на число в диапазоне от 2х до Numbers-1 (j), при выполнении условий, счетчик меняет значение на другое
             is_prime += 1
+            break
     if is_prime == True:                     # Проверка, если порядковый номер в списке Numbers - не простой, тогда выполняется следующее действие: Добавить в список not_primes
         not_primes.append(numbers[i])
     elif is_prime == False:
