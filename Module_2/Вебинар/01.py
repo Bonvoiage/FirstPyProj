@@ -18,5 +18,6 @@ while i <len(l):
     i += 1
 
 
-for j in "hello":
+for j in "hello":    # j принимает str значение, каждого элемента в str
     print(j)
+
