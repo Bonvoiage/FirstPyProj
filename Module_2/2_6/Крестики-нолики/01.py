@@ -1,7 +1,7 @@
 def check_winner():
     for row in range(3):
         if area[row][0] == area[row][1] == area[row][2] != area_symbol:     # Если, строка, столбец 1, столбец 2, столбец 3 не равны area_symbol и равны между собой, то
-            return area[row][0]                                                   # Возвращаем значение из 1 столбца заданной строчки
+            return area[row][0]                                             # Возвращаем значение из 1 столбца заданной строчки
     for col in range(3):                                                    
         if area[0][col] == area[1][col] == area[2][col] != area_symbol:     # Если, столбец, строка 1, строка 2, строка 3 не равны area_symbol и равны между собой, то
             return area[0][col]                                             # Возвращаем значение из 1 строчки заданного столбца
