@@ -27,8 +27,6 @@ def is_contains(string, list_to_search):
             a = True
         elif string.lower() != list_to_search[i].lower():
             continue
-        else:
-            a = False
     return a
 
 
