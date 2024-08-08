@@ -11,7 +11,7 @@ def find_max(list_):
     return max_
 
 
-# print(find_max([1, 2, 1, 5, 0]))
+## print(find_max([1, 2, 1, 5, 0]))
 
 
 def count_even(list_):
