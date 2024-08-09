@@ -8,28 +8,31 @@ data_structure = [
   ((), [{(2, 'Urban', ('Urban2', 35))}])
 ]
 
-def calculate_structure_sum(args):
-    counter = 0
-    if isinstance(args, list):
-        for i in args:
-            counter += calculate_structure_sum(i)
-    elif isinstance(args, dict):
-        for key, value in args.items():
-            counter += calculate_structure_sum(value)
-            counter += calculate_structure_sum(key)
-    elif isinstance(args, tuple):
-        for i in args:
-            counter += calculate_structure_sum(i)
-    elif isinstance(args, set):
-        for i in args:
-            counter += calculate_structure_sum(i)
-    elif isinstance(args, str):
-        counter += len(args)
-    elif isinstance(args, int):
+def calculate_structure_sum(args):                              # Логика функции для подсчета
+    counter = 0                                                 # Куда будем считать символы
+    if isinstance(args, list):                                  # Проверяем элемент на тип - список
+        for i in args:                                          # Перебираем элементы из списка и закидываем каждый в рекурсию
+            counter += calculate_structure_sum(i)               # Сама рекурсия
+    elif isinstance(args, dict):                                # Словарь
+        for key, value in args.items():                         # Добавляем 2 переменные "Ключ" и "Значения"
+            counter += calculate_structure_sum(value)           # Закидываем значения в рекурсию
+            if isinstance(key, (str, int)):                     # Проверяю, если ключ имеет тип str или int - закидываю в рекурсию
+                counter += calculate_structure_sum(key)         # 
+    elif isinstance(args, tuple):                               # Кортеж
+        for i in args:                                          # Перебор
+            counter += calculate_structure_sum(i)               # Рекурсия
+    elif isinstance(args, set):                                 # Множества
+        for i in args:                                          # Перебор
+            counter += calculate_structure_sum(i)               # Рекурсия
+    elif isinstance(args, float):                               # Добавил 2 последних типа, Float/bool, в примере нет, но их так же можно посчитать.
         counter += args
-    else:
-        return 0
-    return counter
+    elif isinstance(args, bool):                                #
+        counter += int(args)
+    elif isinstance(args, str):                                 # ЕСЛИ ЭЛЕМЕНТ - СТРОКА ТОГДА МЫ СЧИТАЕМ ЕЕ! (наконец)
+        counter += len(args)                                    # Подсчет элементов строки
+    elif isinstance(args, int):                                 # Если число - прибавляем к значению
+        counter += args                                         # подсчет
+    return counter                                              # возвращаемся из рекурсий, вытаскивая значения counter
 
 
 result = calculate_structure_sum(data_structure)
