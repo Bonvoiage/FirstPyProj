@@ -19,9 +19,12 @@ def e_mail_checker(e_mail_input):                                           # Л
 def send_email (message, recipient, *, sender = "university.help@gmail.com"):   # Логика фукнции отправки сообщений
     mail_passed = 0                                                             # Назначаю переменную (мог сделать ее со значеием, и в конце возвращать ее, но для того, чтобы не запутаться, изменял переменную в ходе)
 
-    if recipient == sender:                                                     # При одинаковых значениях отправителя и получателя - переменная принимает значение 1
+    if e_mail_checker(sender) == 2:                                             # Проверить отправителя, если отправитель с ошибкой, то вернуть функцию
+        print(f"Невозможно отправить письмо с адреса {sender} на адрес {recipient}")
+        return 
+    elif recipient == sender:                                                   # При одинаковых значениях отправителя и получателя - переменная принимает значение 1
         mail_passed = 1
-    elif e_mail_checker(recipient) and e_mail_checker(sender) == 2:             # Если фунцкия проверки "отправителя" и проверки "получателя" вернула значение 2 - то присваиваю переменной 2
+    elif e_mail_checker(recipient) == 2 and e_mail_checker(sender) == 3:        # Если фунцкия проверки "отправителя" и проверки "получателя" вернула значение 2 - то присваиваю переменной 2
         mail_passed = 2
     elif e_mail_checker(recipient) and e_mail_checker(sender) == 3:             # Если фунцкия проверки "отправителя" и проверки "получателя" вернула значение 3 - то присваиваю переменной 3
         mail_passed = 3 
@@ -46,11 +49,11 @@ def send_email (message, recipient, *, sender = "university.help@gmail.com"):   
                 return mail_passed
 
 
+
 send_email('Это сообщение для проверки связи', 'vasyok1337@gmail.com')
 send_email('Вы видите это сообщение как лучший студент курса!', 'urban.fan@mail.ru', sender='urban.info@gmail.com')
 send_email('Пожалуйста, исправьте задание', 'urban.student@mail.ru', sender = 'urban.teacher@mail.uk')
 send_email('Напоминаю самому себе о вебинаре', 'urban.teacher@mail.ru', sender = 'urban.teacher@mail.ru')
-
 
 
 
