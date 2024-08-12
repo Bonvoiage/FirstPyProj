@@ -1,10 +1,9 @@
 # #from test_module.module_1_5 import mutable_list
-# import sys
-# sys.path.insert(1, "module_2")
-# from sub_2_2.module_2_2 import first
+import sys
+sys.path.insert(1, "module_2")
+from sub_2_2.module_2_2 import first
 
 
-from module_2.Additional_test_module_2 import stone_range
 
 print (stone_range)
 print ()
@@ -36,6 +35,6 @@ print ()
 # # from func1 import func_module1
 
 # # func_module1()
-#
-# for path in sys.path:
-#     print(path)
+
+for path in sys.path:
+    print(path)

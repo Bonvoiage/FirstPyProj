@@ -3,3 +3,6 @@ def fake_divide(a, b):
         return "Ошибка"
     else:
         return a / b
+    
+
+    ####
