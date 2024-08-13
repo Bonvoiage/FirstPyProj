@@ -5,14 +5,14 @@ from sub_2_2.module_2_2 import first
 
 
 
-print (stone_range)
-print ()
-print ()
+# print (stone_range)
+# print ()
+# print ()
 
-# print(isinstance(stone_range, (str, int, list, tuple)))
+# # print(isinstance(stone_range, (str, int, list, tuple)))
 
-print()
-print ()
+# print()
+# print ()
 
 
 # from test_module.module_1_5 import mutable_list
