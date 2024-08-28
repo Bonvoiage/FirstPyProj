@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # #Домашняя работа по уроку "Перегрузка операторов."
 
 class House:
@@ -27,20 +26,20 @@ class House:
         return self.number_of_floors != other.number_of_floors
 
     def __add__(self, other):    
-        if isinstance(other, House) and isinstance(self, int):
+        if isinstance(self, int) and isinstance(other, House):
             resadd = other.number_of_floors + self
             other.number_of_floors = resadd
             return other
-        elif isinstance(self, House) and isinstance(other, int):
-            resadd = self.number_of_floors + other
-            self.number_of_floors = resadd
-            return self
         elif isinstance(self, int) and isinstance(other, int):
             resadd = self + other
             return resadd
         elif isinstance(self, House) and isinstance(other, House):
             resadd = self.number_of_floors + other.number_of_floors
             return resadd
+        elif isinstance(self, House) and isinstance(other, int):
+            resadd = self.number_of_floors + other
+            self.number_of_floors = resadd
+            return self
     def __radd__(self, other):    
         return self.__add__(self, other)
     def __iadd__(self, other):     
