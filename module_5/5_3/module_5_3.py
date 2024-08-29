@@ -41,9 +41,9 @@ class House:
             self.number_of_floors = resadd
             return self
     def __radd__(self, other):    
-        return self.__add__(self, other)
+        return self.__add__(other)
     def __iadd__(self, other):     
-        return self.__add__(self, other)
+        return self.__add__(other)
 
 h1 = House('ЖК Эльбрус', 10)
 h2 = House('ЖК Акация', 20)    
