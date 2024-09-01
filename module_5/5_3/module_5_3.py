@@ -12,18 +12,36 @@ class House:
     def __str__(self):
         return f"Название: {self.name}, кол-во этажей: {self.number_of_floors}"
 
-    def __eq__(self, other):    
-        return self.number_of_floors == other.number_of_floors
+    def __eq__(self, other):
+        if isinstance(other, House):
+            return self.number_of_floors == other.number_of_floors
+        if isinstance(other, int):
+            return self.number_of_floors == other
     def __lt__(self, other):    
-        return self.number_of_floors < other.number_of_floors            
+        if isinstance(other, House):
+            return self.number_of_floors < other.number_of_floors
+        if isinstance(other, int):
+            return self.number_of_floors < other            
     def __le__(self, other):
-        return self.number_of_floors <= other.number_of_floors
+        if isinstance(other, House):
+            return self.number_of_floors <= other.number_of_floors
+        if isinstance(other, int):
+            return self.number_of_floors <= other
     def __gt__(self, other):    
-        return self.number_of_floors > other.number_of_floors
+        if isinstance(other, House):
+            return self.number_of_floors > other.number_of_floors
+        if isinstance(other, int):
+            return self.number_of_floors > other
     def __ge__(self, other):    
-        return self.number_of_floors >= other.number_of_floors
-    def __ne__(self, other):    
-        return self.number_of_floors != other.number_of_floors
+        if isinstance(other, House):
+            return self.number_of_floors >= other.number_of_floors
+        if isinstance(other, int):
+            return self.number_of_floors >= other
+    def __ne__(self, other):
+        if isinstance(other, House):
+            return self.number_of_floors != other.number_of_floors
+        if isinstance(other, int):
+            return self.number_of_floors != other
 
     def __add__(self, other):    
         if isinstance(self, int) and isinstance(other, House):
