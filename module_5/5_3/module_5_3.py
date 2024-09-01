@@ -6,9 +6,6 @@ class House:
         self.name = name
         self.number_of_floors = number_of_floors
 
-
-
-
     def __str__(self):
         return f"Название: {self.name}, кол-во этажей: {self.number_of_floors}"
 
@@ -58,6 +55,7 @@ class House:
             resadd = self.number_of_floors + other
             self.number_of_floors = resadd
             return self
+        
     def __radd__(self, other):    
         return self.__add__(other)
     def __iadd__(self, other):     
