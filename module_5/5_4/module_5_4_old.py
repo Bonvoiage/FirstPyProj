@@ -11,9 +11,14 @@
 
 class Building:
     total = 0
-    def __init__(self, amount_of_buildings):
-        number_of_building = Building.total
-        Building.name = f"obj{number_of_building+1}"
+    list_of_buildings = []
+
+    def __new__ (cls, *args, **kwargs):
+        return super().__new__(cls)
+    def __init__(self, *args, **kwargs):
+        args = Building.total
+        self.name = f"obj{args+1}"
+        Building.list_of_buildings.append(self.name)
         Building.total += 1
 
 
@@ -25,17 +30,18 @@ f"""
 
 Создаются здания:
 """)
-def proverka():
-    for i in range(buildings_need):
-        print(Building(i).name)
+for i in range(buildings_need):
+    print(Building(i).name)
 print(
     """
     Проверка
     """)
-proverka()
+
+print(Building.list_of_buildings)
 
 print(
 """
 Всего создано зданий""")
 print(Building.total)
+print(f"Верно ли то, что кол-во созданых зданий равно колву нужных зданий? {Building.total == buildings_need}")
 
