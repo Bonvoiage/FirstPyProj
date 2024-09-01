@@ -24,3 +24,4 @@ print(b1 == b2)
 b13 = Building(109, "ЖК Эльбрус")
 b23 = Building(10, "ЖК Эльбрус")
 print(b13 == b23)
+####
