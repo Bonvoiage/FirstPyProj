@@ -21,7 +21,7 @@ class Building:
         Building.list_of_buildings.append(self.name)
         Building.total += 1
 
-
+###
 buildings_need = 40
 print(
 f"""
