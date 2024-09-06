@@ -2,132 +2,112 @@
 
 
 
-from time import sleep
-
 class User:
-    def __init__(self, nickname, password, age):
-        self.nickname = nickname
+
+    db_users = {}
+
+    def __init__ (self, nickname, password, age):
+        self.db = User.db_users
+        self.nickname = nickname       
         self.password = hash(password)
-        self.age = age
+        self.age = age                
+        self.db[nickname] = [hash(password), age]
+        
+        
+    def login(self, username, password):
+        pass
+    def current_user_access(self):
+        pass
 
-    def __str__(self):
-        return f'Ник: {self.nickname}'
 
+class Video:
+    
+    db_videos = {}
+    db_keys_lower = []
 
-class Video:          
-    def __init__(self, title: str, duration: int, time_now=0, adult_mode=False):
-        self.title = title
-        self.duration = duration
-        self.time_now = time_now
+    def __init__(self, tittle : str, duration, time_now = 0, adult_mode = False):
+        self.db = Video.db_videos
+        self.title = tittle             
+        self.duration = duration        
+        self.time_now = time_now        
         self.adult_mode = adult_mode
-
+        self.db[tittle] = [duration, time_now, adult_mode]
+        self.lower = Video.db_keys_lower
+        self.lower.append(tittle.lower())
 
 
 class UrTube:
-    def __init__(self):
-        self.users = []
-        self.videos = []
-        self.current_user = None
 
-    def register(self, nickname, password, age):
-        # Проверяем, существует ли пользователь
-        for user in self.users:
-            if user.nickname == nickname:
-                print(f"Пользователь {nickname} уже существует")
-                return
-
-        # Создаем и добавляем нового пользователя
-        new_user = User(nickname, password, age)
-        self.users.append(new_user)
-        self.current_user = new_user
-        print(f"Пользователь {nickname} успешно зарегистрирован и вошел в систему")
-
-    def log_in(self, nickname, password):
-        # Ищем пользователя с указанными данными
-        for user in self.users:
-            if user.nickname == nickname and user.password == hash(password):
-                self.current_user = user
-                print(f"Вход выполнен, здравствуйте, {nickname}")
-                return
-        print("Неверный логин или пароль")
-
-    def log_out(self):
-        self.current_user = None
-        print("Выход из учетной записи выполнен")
-
-    def add(self, *videos):
-        for video in videos:
-            vid_in_database = False
-            for vid_in_db in self.videos:
-                if vid_in_db.title == video.title:
-                    vid_in_database = True
-                    break
-            if vid_in_database:
-                print(f"Видео '{video.title}' существует")
-            else:
-                self.videos.append(video)
-                # print(f"Видео '{video.title}' добавлено")
-
-    def get_videos(self, search_word):
-        search_word = search_word.lower()
-        result = []
-        for i in self.videos:
-            if search_word in i.title.lower():
-                result.append(i.title)
-        return result
-
-    def watch_video(self, title):
-        if not self.current_user:
-            print("Войдите в аккаунт, чтобы смотреть видео")
-            return
-        # Поиск видео
-        video = None
-        for i in self.videos:
-            if i.title == title:
-                video = i
-                break
-        if video is None:
-            print("Видео не найдено")
-            return
-        # Проверка возрастного ограничения
-        if video.adult_mode and self.current_user.age < 18:
-            print("Вам нет 18 лет, пожалуйста покиньте страницу")
-            return
-        # Воспроизведение видео
-        second = video.time_now + 1
-        while second <= video.duration:
-            print(second, end=" ", flush=True)
-            sleep(1)
-            second += 1
-        print("\nКонец видео")
-        video.time_now = 0
+    def __init__(self, *args, **kwargs):
+        pass
 
 
-# Пример использования
+    def register(self, username, password, age):
+          #добавил юзера в базу данных класса юзер
+        if username in  User.db_users.keys():
+            print("Пользователь уже зарегистрирован")
+        else:
+            User(username, password, age)
+            print("Пользователь успешно зарегистрирован")
+            UrTube.log_in(self, username, password)
+            print("Вход выполнен, здравствйуте, ", username)
+
+    def add(self, tittle : str, duration : int, time_now = 0, adult_mode = False):
+        if tittle in Video.db_videos.keys():
+            print(f"Видео {tittle} уже существует")
+        else:
+            print("Видео успешно добавлено")
+            Video(tittle, duration, time_now, adult_mode)  #добавил видео в базу данных класса видео
+
+    def log_in(self, username, password):
+        if User.db_users[username][0] == hash(password):   #проверил юзера в базе данных
+            return True
+        else:
+            return False
+        
+    def get_videos(self, part_of_tittle):
+        for part_of_tittle in Video.db_keys_lower:
+            print(Video.db_keys_lower)
+        else:
+            print("Видео не найдено")
+
+            
+
+
+
 ur = UrTube()
+
 v1 = Video('Лучший язык программирования 2024 года', 200)
 v2 = Video('Для чего девушкам парень программист?', 10, adult_mode=True)
 
-# Добавление видео
 ur.add(v1, v2)
 
-# Проверка поиска
+print(v1.title, ",", v2.title)
+print()
+print(Video.db_videos)
+print()
+
 print(ur.get_videos('лучший'))
 print(ur.get_videos('ПРОГ'))
 
-# Проверка на вход пользователя и возрастное ограничение
-ur.watch_video('Для чего девушкам парень программист?')
+
+# user_add_test = ur.register(
+#     username := input("Введите имя: "),
+#     password := int(input("Введите пароль: ")),
+#     age := int(input("Введите возраст: "))
+# )
+
 ur.register('vasya_pupkin', 'lolkekcheburek', 13)
-ur.watch_video('Для чего девушкам парень программист?')
 ur.register('urban_pythonist', 'iScX4vIJClb9YQavjAgF', 25)
-ur.watch_video('Для чего девушкам парень программист?')
 
 # Проверка входа в другой аккаунт
 ur.register('vasya_pupkin', 'F8098FM8fjm9jmi', 55)
-print(ur.current_user)
 
-# Попытка воспроизведения несуществующего видео
-ur.watch_video('Лучший язык программирования 2024 года!')
+print(User.db_users)
+
+
+input("Нажмите Enter для продолжения...")
+print()
 
 
 
