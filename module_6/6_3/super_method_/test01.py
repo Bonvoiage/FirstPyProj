@@ -41,3 +41,4 @@ class Student(Human, StudentGroup):
         super().info()
 
 student = Student("Max", "Moscow", "pyhton 03")
+###
