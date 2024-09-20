@@ -7,7 +7,6 @@ class Figure:
     __color = ()
     filled = False
 
-
     def __init__(self, color_input : tuple, *sides):
         self.r = color_input[0]
         self.g = color_input[1]
@@ -78,15 +77,22 @@ class Figure:
 class Circle(Figure):
 
     sides_count= 1
-    
-    def __init__(self, color_input: tuple, *sides):
-        super().__init__(color_input, *sides)
-        self.__radius = self.get_sides()
+    __radius = 0
 
+class Circle(Figure):
+
+    sides_count = 1  # У круга одна сторона - радиус
+    __radius = 0
+
+    def __init__(self, color_input: tuple, sides):
+        super().__init__(color_input, sides)
+        self.__radius = sides  # Сохраняем радиус
+
+    # Площадь круга
     def get_square(self):
-        return 3.14 * (self.__radius ** 2)
-
-
+        check_radius_change = self.get_sides()
+        return 3.14 * (check_radius_change[0] ** 2)
+    
 class Triangle(Figure):
 
     sides_count= 3
@@ -95,8 +101,10 @@ class Triangle(Figure):
         super().__init__(color_input, *sides)
         self.__side = self.get_sides()
 
+    # Площадь по формуле Герона
     def get_square(self):
         from math import sqrt
+        self.__side = self.get_sides()
         p = 0.5 * (self.__side[0] + self.__side[1] + self.__side[2])
         S = sqrt(p * (p - self.__side[0]) * (p - self.__side[1]) * (p - self.__side[2]))
         return S
@@ -110,7 +118,9 @@ class Cube(Figure):
         super().__init__(color_input, *sides)
         self.__side = self.get_sides()
 
+    # Площадь куба
     def get_volume(self):
+        self.__side = self.get_sides()
         return self.__side[0] ** 3
 
 
@@ -123,10 +133,7 @@ class Cube(Figure):
 
 circle1 = Circle((200, 200, 100), 10) # (Цвет, стороны)
 cube1 = Cube((222, 35, 130), 6)
-# triangle1 = Triangle((200, 200, 200), 3, 6, 8)
-
-# print(triangle1.get_sides())
-# print(triangle1.get_square())
+triangle1 = Triangle((200, 200, 200), 3, 6, 8)
 
 
 # Проверка на изменение цветов:
@@ -148,11 +155,17 @@ print(len(circle1))
 # # Проверка объёма (куба):
 print(cube1.get_volume())
 
+print(f"""
+
+
+Площадь куба: {cube1.get_volume()}
+Площадь круга: {circle1.get_square()}
+Площадь треугольника: {triangle1.get_square()}
 
 
 
 
-
+""")
 
 
 
