@@ -49,8 +49,8 @@ class Figure:
     # устанавливаем стороны после проверки
     def set_sides(self, *new_sides):
         sides_check = self.__is_valid_sides(new_sides)
-        if sides_check and len(new_sides) != 1:
-            self.__sides.append(new_sides)
+        if sides_check == True and len(new_sides) != 1:
+            self.__sides = new_sides
         elif sides_check and len(new_sides) == 1:
             self.__sides = []
             new_sides = new_sides[0]
@@ -123,6 +123,10 @@ class Cube(Figure):
 
 circle1 = Circle((200, 200, 100), 10) # (Цвет, стороны)
 cube1 = Cube((222, 35, 130), 6)
+# triangle1 = Triangle((200, 200, 200), 3, 6, 8)
+
+# print(triangle1.get_sides())
+# print(triangle1.get_square())
 
 
 # Проверка на изменение цветов:
