@@ -58,20 +58,10 @@ class Figure:
         else:
             return True
         
-    def recurce_start(self, new_sides):
-        rec_new_sides = []
-        if isinstance(new_sides, list, tuple):
-            for i in new_sides:
-                self.recurce_start(i)
-        elif isinstance(new_sides, int):
-            rec_new_sides.append(new_sides)
-        return rec_new_sides
 
     # устанавливаем стороны после проверки
     def set_sides(self, *new_sides):
         sides_check = self.__is_valid_sides(new_sides)
-        new_sides = self.recurce_start(new_sides)
-        sides_check = self.recurce_start(sides_check)
         if sides_check == True and len(new_sides) != 1:
             self.__sides = new_sides
         elif sides_check and len(new_sides) == 1:
@@ -148,13 +138,6 @@ class Cube(Figure):
         return self.__side[0] ** 3
 
 
-
-
-
-
-
-
-
 circle1 = Circle((200, 200, 100), 10) # (Цвет, стороны)
 cube1 = Cube((222, 35, 130), 6)
 triangle1 = Triangle((200, 200, 200), 3, 6, 8)
@@ -181,13 +164,9 @@ print(cube1.get_volume())
 
 print(f"""
 
-
 Площадь куба: {cube1.get_volume()}
 Площадь круга: {circle1.get_square()}
 Площадь треугольника: {triangle1.get_square()}
-
-
-
 
 """)
 

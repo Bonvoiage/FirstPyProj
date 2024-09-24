@@ -1,6 +1,6 @@
 import math
 import time
-from module_6_hard import Figure, Circle, Triangle, Cube
+from module_6_hard_copy import Figure, Circle, Triangle, Cube
  
 TIME_COUNT = 3
  
