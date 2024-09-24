@@ -3,16 +3,18 @@
 
 class Figure:
     
-    __sides = 0
-    __color = ()
+    
     filled = False
+    sides_count = 0
 
-    def __init__(self, color_input : tuple, *sides):
-        self.r = color_input[0]
-        self.g = color_input[1]
-        self.b = color_input[2]
+    def __init__(self, color, *sides : int):
+        self.r = color[0]
+        self.g = color[1]
+        self.b = color[2]
         self.set_color(self.r, self.g, self.b)
         self.set_sides(*sides)
+        self.__side = 0
+        self.__color = []
 
     # проверка на валидность цвета
     def __is_valid_color(self, new_color):
@@ -29,7 +31,7 @@ class Figure:
         g_check = self.__is_valid_color(g)
         b_check = self.__is_valid_color(b)
         if r_check and g_check and b_check:
-            self.__color = (r, g, b)
+            self.__color = [r, g, b]
     
     # получаем цвет
     def get_color(self):
@@ -37,17 +39,39 @@ class Figure:
 
     # проверка на валидность сторон
     def __is_valid_sides(self, new_sides):
+        # checker = False
+        # if len(new_sides) != 0:
+        #     for i in range(len(*new_sides)):
+        #         new_sides_i_number = new_sides[i]
+        #         if new_sides_i_number < 0:
+        #             checker = False
+        #         else:
+        #             checker = True
         if len(new_sides) == 1:
             return True
         elif len(new_sides) != self.sides_count:
             print("Недопустимое количество сторон")
             return False
+        # elif checker == False:
+        #     print("Недопустимое значение стороны")
+        #     return False
         else:
             return True
+        
+    def recurce_start(self, new_sides):
+        rec_new_sides = []
+        if isinstance(new_sides, list, tuple):
+            for i in new_sides:
+                self.recurce_start(i)
+        elif isinstance(new_sides, int):
+            rec_new_sides.append(new_sides)
+        return rec_new_sides
 
     # устанавливаем стороны после проверки
     def set_sides(self, *new_sides):
         sides_check = self.__is_valid_sides(new_sides)
+        new_sides = self.recurce_start(new_sides)
+        sides_check = self.recurce_start(sides_check)
         if sides_check == True and len(new_sides) != 1:
             self.__sides = new_sides
         elif sides_check and len(new_sides) == 1:
@@ -84,8 +108,8 @@ class Circle(Figure):
     sides_count = 1  # У круга одна сторона - радиус
     __radius = 0
 
-    def __init__(self, color_input: tuple, sides):
-        super().__init__(color_input, sides)
+    def __init__(self, color, *sides : int):
+        super().__init__(color, sides)
         self.__radius = sides  # Сохраняем радиус
 
     # Площадь круга
@@ -97,8 +121,8 @@ class Triangle(Figure):
 
     sides_count= 3
 
-    def __init__(self, color_input: tuple, *sides):
-        super().__init__(color_input, *sides)
+    def __init__(self, color, *sides : int):
+        super().__init__(color, *sides)
         self.__side = self.get_sides()
 
     # Площадь по формуле Герона
@@ -166,8 +190,6 @@ print(f"""
 
 
 """)
-
-
 
 
 
