@@ -5,12 +5,15 @@
 name = '../FirstPyProj/module_7/7_2/sample.txt'
 
 def custom_write(file_name, strings):
-    file = open(file_name, "w", encoding="utf-8")
+    file_write = open(file_name, "w", encoding="utf-8")
     strings_positions = {}
+    key_tuple = ()
     for i in range(len(strings)):
-        file.write(strings[i] + "\n")
-        strings_positions[i] = strings[i]
-    file.close()
+        # print(file_write.tell())
+        key_tuple = (i, file_write.tell())
+        file_write.write(strings[i] + "\n")
+        strings_positions[key_tuple] = strings[i]
+    file_write.close()
     return strings_positions
 
 
@@ -22,8 +25,8 @@ info = [
     ]
 
 result = custom_write(name, info)
-for key in result.items():
-  print(key)
+for elem in result.items():
+  print(elem)
 
 
 
