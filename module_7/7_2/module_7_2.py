@@ -10,7 +10,7 @@ def custom_write(file_name, strings):
     key_tuple = ()
     for i in range(len(strings)):
         # print(file_write.tell())
-        key_tuple = (i, file_write.tell())
+        key_tuple = (i+1, file_write.tell())
         file_write.write(strings[i] + "\n")
         strings_positions[key_tuple] = strings[i]
     file_write.close()
