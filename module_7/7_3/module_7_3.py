@@ -2,13 +2,92 @@
 
 
 
+#Я работаю в VSCode мне необходимо писать путь каждый раз при работе с открытием. либо я банально не знаю как по другому.
+# universal_file_name = 'module_7/7_3/files_for_module_7_3_new/'
 
-universal_file_name = '../FirstPyProj/module_7/7_3/files_for_module_7_3/'
+# test01 = universal_file_name + 'file1.txt'
+# file_test01 = open(test01, 'w', encoding='utf-8')
+# file_test01.write("Hello, World!")
+# file_test01.close()
+
+# def write_file(*file_names):
+#     list_names = []
+#     for file_name in file_names:
+#         if file_name in list_names:
+#             continue
+#         if file_name not in list_names:
+#             list_names.append(file_name)
+#     return list_names
+
+
+universal_file_name = 'module_7/7_3/files_for_module_7_3_new/'
+class WordsFinder:
+    
+    punctuation_marks = [',', '.', '=', '!', '?', ';', ':', ' - ']
+
+    def __init__(self, *file_names):
+        # self.file_name_raw = []
+        # self.file_name_raw = write_file(file_names)
+        self.file_names = []
+        for file_name in file_names:
+            if file_name in self.file_names:
+                continue
+            if file_name not in self.file_names:
+                self.file_names.append(universal_file_name + file_name)
+
+    def get_all_words(self):
+        all_words = {}
+        for file_name in self.file_names:
+            with open(file_name, 'r', encoding='utf-8') as file:
+                content = file.read().lower()  
+                for mark in self.punctuation_marks:
+                    content = content.replace(mark, '')  
+                all_words[file_name] = content.split()  
+        return all_words
+    
+    def find(self, word : str):
+        all_words = self.get_all_words()
+        lower_word = word.lower()
+        for file_name in all_words:
+            if lower_word in all_words[file_name]:
+                position = all_words[file_name].index(lower_word)
+                return (f"""
+В документе '{file_name}'
+{word} находится в позиции
+{position + 1} слово по счёту
+ """)
+            else:
+                return "Такого слова нет"
+        
+
+    def count(self, word : str):
+        all_words = self.get_all_words()
+        lower_word = word.lower()
+        count = 0
+        for file_name in all_words:
+            list_of_words = all_words.values()
+            for i in list_of_words:
+                for j in i:
+                    if lower_word == j:
+                        count += 1
+                    else:
+                        continue
+                else:
+                    continue
+                # можно было доавить сюда 
+            # return f"В файле "{file_name}" Слово '{word}' в тексте всего {count} раза" 
+            #но получается очень длинно
+            return f"Слово '{word}' в тексте всего {count} раза"
 
 
 
+# text_file1 = WordsFinder("file1.txt")
+# print(text_file1.get_all_words())
 
-
+finder2 = WordsFinder('file1.txt')
+print(finder2.get_all_words()) # Все слова
+print(finder2.find('TEXT')) # 3 слово по счёту
+print(finder2.count('teXT')) # 4 слова teXT в тексте всего
 
 
 
