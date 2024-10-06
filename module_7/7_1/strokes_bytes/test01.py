@@ -1,6 +1,8 @@
 # print("hello, world") # ASCII
-# print(ord("a")) # 97
-# print(ord("A")) # 65
+print(ord("a")) # 97
+print(ord("A")) # 65
+print(chr(65))
+
 
 # just_test = "hello, world"
 # chars = []
@@ -18,7 +20,7 @@
 # for i in range(128):
 #     print(f"{i} = {chr(i)}")
 
-print(hex(ord("h"))) #0x68
-bb = b"\x68"
-print(type(bb))
-print(bb.decode())
+# print(hex(ord("h"))) #0x68
+# bb = b"\x68"
+# print(type(bb))
+# print(bb.decode())

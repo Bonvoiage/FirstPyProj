@@ -1,0 +1,6 @@
+test = "12131
+print (test)
+
+
+test = 0
+print (10 / test)
