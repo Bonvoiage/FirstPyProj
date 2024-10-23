@@ -93,9 +93,9 @@ matrix_on_my_numbers = matrix(my_numbers)
 # print(list(result))
 
 my_numbers.extend([10, 20, 30])
-their_numbers.extend([30, 20, 10])
+# their_numbers.extend([30, 20, 10])
 
 matrix_on_my_numbers = matrix(my_numbers)
 
 result = map(matrix_on_my_numbers, their_numbers)
-print(list(result))
+pprint(list(result))
