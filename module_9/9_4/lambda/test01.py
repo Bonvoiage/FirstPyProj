@@ -73,29 +73,52 @@
 
 #6 
 
-from pprint import pprint
+# from pprint import pprint
 
-def matrix(some_list):
+# def matrix(some_list):
 
-    def multiply_cols(x):
-        res = []
-        for elem in some_list:
-            res.append(elem * x)
-        return res
-    return multiply_cols
+#     def multiply_cols(x):
+#         res = []
+#         for elem in some_list:
+#             res.append(elem * x)
+#         return res
+#     return multiply_cols
 
-my_numbers = [3, 1, 4, 1, 5, 9, 2, 6]
-their_numbers = [2, 7, 1, 8, 2, 8, 1, 8]
+# my_numbers = [3, 1, 4, 1, 5, 9, 2, 6]
+# their_numbers = [2, 7, 1, 8, 2, 8, 1, 8]
 
-matrix_on_my_numbers = matrix(my_numbers)
+# matrix_on_my_numbers = matrix(my_numbers)
+
+# # result = map(matrix_on_my_numbers, their_numbers)
+# # print(list(result))
+
+# my_numbers.extend([10, 20, 30])
+# # their_numbers.extend([30, 20, 10])
+
+# matrix_on_my_numbers = matrix(my_numbers)
 
 # result = map(matrix_on_my_numbers, their_numbers)
-# print(list(result))
+# pprint(list(result))
 
-my_numbers.extend([10, 20, 30])
-# their_numbers.extend([30, 20, 10])
 
-matrix_on_my_numbers = matrix(my_numbers)
+#7
 
-result = map(matrix_on_my_numbers, their_numbers)
-pprint(list(result))
+class Multiplier:
+
+    def __init__(self, multiplier):
+        self.multiplier = multiplier
+
+    def __call__(self, x):
+        return x * self.multiplier
+    
+
+my_nums = [3, 1, 4, 1, 5, 9, 2, 6]
+# th_nums = [2, 7, 1, 8, 2, 8, 1, 8]
+by_any_amount = Multiplier(12)
+result = by_any_amount(10)
+print(result)
+
+result = map(by_any_amount, my_nums)
+print(list(result))
+
+# result = map(Multiplier(3), my_nums)
